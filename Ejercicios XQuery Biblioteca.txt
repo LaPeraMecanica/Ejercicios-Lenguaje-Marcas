@@ -1,0 +1,32 @@
+1.
+for $x in /biblioteca/libros/libro
+return <libro>{&x/titulo/text()} - {$x/editorial/text()} </libro>
+
+2.
+for $x in /biblioteca/libros/libro
+where number($x/paginas) < 400
+return data ($x/titulo)
+
+3.
+count(
+  for $libro in /biblioteca/libros/libro
+  where number ($libro/paginas) > 400
+  return $libro
+)
+
+4.
+<ul>
+{
+  for $libro in //biblioteca/libros/libro
+  where $libro/editorial = "o'Reilly Media"
+  return <li> {data($libro/titulo)}</li>
+}
+</ul>
+
+5.
+for $libro in //biblioteca/libros/libro
+where $libro[@publicacion=2018 or @publicaion=2019]
+return <libro>{$libro/titulo, $libro/editorial}</libro>
+
+for $libro in //biblioteca/libros/libro
+where $libro[@publicacion=2018 or @publicaion=2019]
